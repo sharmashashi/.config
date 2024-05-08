@@ -60,28 +60,7 @@
                     "mouse_flip_y": false,
                     "mouse_swap_wheels": false,
                     "mouse_swap_xy": false,
-                    "simple_modifications": [
-                        {
-                            "from": {
-                                "key_code": "caps_lock"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "escape"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "right_command"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "left_control"
-                                }
-                            ]
-                        }
-                    ],
+                    "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
                 {
@@ -163,16 +142,6 @@
                             "to": [
                                 {
                                     "key_code": "left_control"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "up_arrow"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "right_shift"
                                 }
                             ]
                         }
