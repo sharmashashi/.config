@@ -32,13 +32,12 @@ function run_flutter_app(device_id, flavor)
     if flavor then 
 	    cmd = "flutter run -d ".. device_id.. " --flavor "..flavor 
     end
-    vim.api.nvim_command("botright vnew | vertical resize 70")
-    terminal_bufnr = vim.fn.bufnr('%')
+    vim.api.nvim_command("botright vsplit | vertical resize 50")
     vim.api.nvim_command("term " .. cmd)
+    terminal_bufnr = vim.api.nvim_get_current_buf()
     vim.api.nvim_command("set modifiable")
     -- Wait for the terminal to be ready
-    vim.api.nvim_command("wincmd p")
-
+    --vim.api.nvim_command("wincmd p")
     -- Move cursor to the end
     vim.api.nvim_feedkeys("G", "n", true)
 end
