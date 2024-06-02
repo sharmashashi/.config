@@ -1,4 +1,3 @@
-
 local M = {}
 function M.setup()
     -- Show absolute line numbers

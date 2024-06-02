@@ -71,7 +71,13 @@ vim.api.nvim_set_keymap("n", "<leader>fe", ":lua show_flutter_emulators()<CR>", 
 vim.api.nvim_set_keymap('n', '<leader>cs', ':nohlsearch<CR>', {})
 
 -- dap
-vim.api.nvim_set_keymap('n', '<leader>br', ":lua require'dap'.toggle_breakpoint()<CR>",{})
-vim.api.nvim_set_keymap('n', '<leader>dc', ":lua start_dap()<CR>",{})
-vim.api.nvim_set_keymap('n', '<leader>do', ":lua require'dapui'.toggle()<CR>",{})
-vim.api.nvim_set_keymap('n', '<leader>dq', ":lua require'dap'.terminate()<CR>",{})
+vim.api.nvim_set_keymap('n', '<leader>br', ":lua require'dap'.toggle_breakpoint()<CR>", {})
+vim.api.nvim_set_keymap('n', '<leader>dc', ":lua start_dap()<CR>", {})
+vim.api.nvim_set_keymap('n', '<leader>do', ":lua require'dapui'.toggle()<CR>", {})
+vim.api.nvim_set_keymap('n', '<leader>dq', ":lua require'dap'.terminate()<CR>", {})
+
+-- window resize
+vim.api.nvim_set_keymap('n', '<leader>rh', ":vertical resize -5<CR>", {})
+vim.api.nvim_set_keymap('n', '<leader>rl', ":vertical resize +5<CR>", {})
+vim.api.nvim_set_keymap('n', '<leader>rj', ":horizontal resize +5<CR>", {})
+vim.api.nvim_set_keymap('n', '<leader>rk', ":horizontal resize -5<CR>", {})
