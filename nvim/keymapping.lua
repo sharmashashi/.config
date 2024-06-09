@@ -6,6 +6,8 @@ vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>gc", builtin.git_commits, {})
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, {})
 
+vim.keymap.set("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", {})
+vim.keymap.set("n", "<leader>hd", ":lua hoverDocumentation()<CR>", {})
 -- NvimTree
 -- Toggle NvimTree
 vim.api.nvim_set_keymap("n", "<leader>t", ":NvimTreeToggle<CR>", {
@@ -14,33 +16,6 @@ vim.api.nvim_set_keymap("n", "<leader>t", ":NvimTreeToggle<CR>", {
 })
 -- Refresh NvimTree
 vim.api.nvim_set_keymap("n", "<leader>r", ":NvimTreeRefresh<CR>", {
-	noremap = true,
-	silent = true,
-})
-
--- Lspsaga
--- Code action
-vim.api.nvim_set_keymap("n", "<leader>ca", ":Lspsaga code_action<CR>", {
-	noremap = true,
-	silent = true,
-})
--- Hover documentation
-vim.api.nvim_set_keymap("n", "<leader>hd", ":Lspsaga hover_doc<CR>", {
-	noremap = true,
-	silent = true,
-})
--- Floating terminal
-vim.api.nvim_set_keymap("n", "<leader>ft", ":Lspsaga term_toggle<CR>", {
-	noremap = true,
-	silent = true,
-})
--- Go to definition
-vim.api.nvim_set_keymap("n", "<leader>gd", ":Lspsaga goto_definition<CR>", {
-	noremap = true,
-	silent = true,
-})
-
-vim.api.nvim_set_keymap("n", "<leader>e", ":Lspsaga show_workspace_diagnostics<CR>", {
 	noremap = true,
 	silent = true,
 })
@@ -80,3 +55,11 @@ vim.api.nvim_set_keymap("n", "<leader>rh", ":vertical resize -5<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>rl", ":vertical resize +5<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>rj", ":horizontal resize +5<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>rk", ":horizontal resize -5<CR>", {})
+---
+vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>w", {
+	noremap = true,
+	silent = true,
+})
+
+---formatting
+vim.api.nvim_set_keymap("n", "<Leader>df", [[:lua vim.lsp.buf.format()<CR>]], { noremap = true, silent = true })

@@ -20,8 +20,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
-
-require("formatter.formatter")
+require("telescope").load_extension("ui-select")
 require("utils")
 require("keymapping")
 require("linenumber").setup()
