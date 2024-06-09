@@ -1,2 +1,2 @@
-require('flutter.flutteremulators')
-require('flutter.flutterrun')
+require("flutter.flutteremulators")
+require("flutter.flutterrun")
