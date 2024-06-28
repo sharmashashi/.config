@@ -37,8 +37,8 @@ function launch_selected_emulator()
 	local emulator_id = vim.fn.matchlist(vim.fn.getline(line_number), "\\v^([^:]+):")[2]
 
 	if emulator_id then
-		close_emulators_window()
 		run_shell_command("flutter emulators --launch " .. emulator_id)
+		close_emulators_window()
 	end
 end
 
@@ -76,7 +76,7 @@ function show_flutter_emulators()
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.fn.split(content, "\n"))
 
-	local win_id = vim.api.nvim_open_win(bufnr, true, {
+        local win_id = vim.api.nvim_open_win(bufnr, true, {
 		relative = "editor",
 		width = width,
 		height = height,

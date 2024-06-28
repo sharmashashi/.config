@@ -63,3 +63,8 @@ vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>w", {
 
 ---formatting
 vim.api.nvim_set_keymap("n", "<Leader>df", [[:lua vim.lsp.buf.format()<CR>]], { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("n", "<leader>ft", ":Lspsaga term_toggle<CR>", {
+	noremap = true,
+	silent = true,
+})
