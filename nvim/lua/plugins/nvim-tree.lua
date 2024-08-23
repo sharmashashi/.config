@@ -11,6 +11,10 @@ return {
 			view = {
 				side = "left",
 				width = 30,
+				preserve_window_proportions = true,
+				--float = {
+				--enable = true
+				--}
 			},
 			renderer = {
 				group_empty = true,

@@ -23,8 +23,8 @@ return {
 				--toolArgs = {"-d", "macos"}
 				--toolArgs = {"-d", "chrome"}
 				--toolArgs = {"-d", "9B68399B-1DAD-4967-856D-F6E99456E579"}
-				toolArgs = { "-d", "9B68399B-1DAD-4967-856D-F6E99456E579", "--flavor=development_ios" },
-				--toolArgs = {"-d", "emulator-5554", "--flavor=development_android"}
+				--toolArgs = { "-d", "9B68399B-1DAD-4967-856D-F6E99456E579", "--flavor=development_ios" },
+				toolArgs = {"-d", "emulator-5554", "--flavor=development_android"}
 				--toolArgs = {"-d", "065c95130405"}
 			},
 		}

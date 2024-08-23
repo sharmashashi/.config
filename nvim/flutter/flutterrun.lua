@@ -33,6 +33,7 @@ function run_flutter_app(device_id, flavor)
 		cmd = "flutter run -d " .. device_id .. " --flavor " .. flavor
 	end
 	vim.api.nvim_command("botright vsplit | vertical resize 50")
+	--vim.api.nvim_command("split | horizontal resize 20")
 	vim.api.nvim_command("term " .. cmd)
 	terminal_bufnr = vim.api.nvim_get_current_buf()
 	vim.api.nvim_command("set modifiable")
