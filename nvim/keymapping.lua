@@ -51,8 +51,8 @@ vim.api.nvim_set_keymap("n", "<leader>do", ":lua require'dapui'.toggle()<CR>", {
 vim.api.nvim_set_keymap("n", "<leader>dq", ":lua require'dap'.terminate()<CR>", {})
 
 -- window resize
-vim.api.nvim_set_keymap("n", "<leader>rh", ":vertical resize -5<CR>", {})
-vim.api.nvim_set_keymap("n", "<leader>rl", ":vertical resize +5<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>-", ":vertical resize -5<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>=", ":vertical resize +5<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>rj", ":horizontal resize +5<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>rk", ":horizontal resize -5<CR>", {})
 ---
