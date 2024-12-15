@@ -76,7 +76,7 @@ function send_input_to_terminal(keys)
 end
 
 -- Function to show Flutter devices and select a device to run the app
-function show_flutter_devices(flavor)
+function show_flutter_devices(flavor, callback)
 	local devices = get_flutter_devices()
 
 	local lines = {}
@@ -101,15 +101,28 @@ function show_flutter_devices(flavor)
 		zindex = 50,
 		border = "rounded",
 	})
-
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<CR>", ":lua launch_selected_device()<CR>", {
-		noremap = true,
-		silent = true,
-	})
+	if (callback) then
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "<CR>", ":lua return_selected_device()<CR>)", {
+			noremap = true,
+			silent = true,
+		})
+	else
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "<CR>", ":lua launch_selected_device()<CR>)", {
+			noremap = true,
+			silent = true,
+		})
+	end
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "q", ":lua close_device_selection()<CR>", {
 		noremap = true,
 		silent = true,
 	})
+
+	_G.return_selected_device = function()
+		local line_number = vim.fn.line(".")
+		local selected_device = devices[line_number]
+		close_device_selection()
+		callback(selected_device.id)
+	end
 
 	-- Clear the processing status in the bottom status line
 	vim.api.nvim_command("echohl None | echo ''")

@@ -6,12 +6,12 @@ return {
 			layouts = {
 				{
 					elements = { "breakpoints", "scopes" },
-					position = "top",
+					position = "right",
 					size = 0.15,
 				},
 				{
 					elements = { "repl" },
-					position = "top",
+					position = "right",
 					size = 0.25,
 				},
 			},

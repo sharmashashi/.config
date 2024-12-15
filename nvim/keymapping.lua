@@ -23,22 +23,22 @@ vim.api.nvim_set_keymap("n", "<leader>r", ":NvimTreeRefresh<CR>", {
 -- Flutter
 
 -- Command to trigger running all Flutter tools
-vim.api.nvim_set_keymap("n", "<leader>far", ":lua run_flutter_tools()<CR>", {
+vim.api.nvim_set_keymap("n", "<leader>far", ":lua flutter_attach_setup()<CR>", {
 	noremap = true,
 	silent = true,
 })
-vim.api.nvim_set_keymap("n", "<leader>fr", ":lua flutter_hot_reload()<CR>", {
-	noremap = true,
-	silent = true,
-})
-vim.api.nvim_set_keymap("n", "<leader>ffr", ":lua flutter_hot_restart()<CR>", {
-	noremap = true,
-	silent = true,
-})
-vim.api.nvim_set_keymap("n", "<leader>faq", ":lua flutter_quit_app()<CR>", {
-	noremap = true,
-	silent = true,
-})
+--vim.api.nvim_set_keymap("n", "<leader>fr", ":lua flutter_hot_reload()<CR>", {
+--noremap = true,
+--silent = true,
+--})
+--vim.api.nvim_set_keymap("n", "<leader>ffr", ":lua flutter_hot_restart()<CR>", {
+--noremap = true,
+--silent = true,
+--})
+--vim.api.nvim_set_keymap("n", "<leader>faq", ":lua flutter_quit_app()<CR>", {
+--noremap = true,
+--silent = true,
+--})
 vim.api.nvim_set_keymap("n", "<leader>fe", ":lua show_flutter_emulators()<CR>", { noremap = true, silent = true })
 
 -- Clear search
@@ -48,7 +48,7 @@ vim.api.nvim_set_keymap("n", "<leader>cs", ":nohlsearch<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>br", ":lua require'dap'.toggle_breakpoint()<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>dc", ":lua start_dap()<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>do", ":lua require'dapui'.toggle()<CR>", {})
-vim.api.nvim_set_keymap("n", "<leader>dq", ":lua require'dap'.terminate()<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>faq", ":lua require'dap'.terminate()<CR>", {})
 
 -- window resize
 vim.api.nvim_set_keymap("n", "<leader>-", ":vertical resize -5<CR>", {})
@@ -65,6 +65,11 @@ vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>w", {
 vim.api.nvim_set_keymap("n", "<Leader>df", [[:lua vim.lsp.buf.format()<CR>]], { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>ft", ":Lspsaga term_toggle<CR>", {
+	noremap = true,
+	silent = true,
+})
+-- load previous/last buffer
+vim.api.nvim_set_keymap("n", "<leader>ll", ":b#<CR>", {
 	noremap = true,
 	silent = true,
 })
