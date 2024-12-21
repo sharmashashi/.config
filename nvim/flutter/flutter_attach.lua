@@ -1,14 +1,31 @@
 flutter_terminal_buf = nil
+
 function flutter_attach()
-	-- Open a terminal and run flutter attach
-	--vim.cmd('vsplit')
+	-- Prompt user for a custom command
+	vim.ui.input({ prompt = "Do you want to enter a custom command? (Y/n): " }, function(input)
+		if input and input:lower() == "y" then
+			-- If user chooses "Y", prompt for the custom command
+			vim.ui.input({ prompt = "Enter the custom command: " }, function(custom_cmd)
+				if custom_cmd and #custom_cmd > 0 then
+					-- Run the custom command
+					execute_command(custom_cmd)
+				else
+					print("No command entered. Aborting.")
+				end
+			end)
+		else
+			-- Run the default "flutter attach" command
+			execute_command("flutter attach")
+		end
+	end)
+end
+
+function execute_command(cmd)
+	-- Open a terminal and run the command
 	vim.api.nvim_command("botright vsplit | vertical resize 50")
-	local cmd = "flutter attach"
-	-- Capture the terminal buffer ID
 	vim.api.nvim_command("term " .. cmd)
 	flutter_terminal_buf = vim.api.nvim_get_current_buf()
 	vim.api.nvim_command("set modifiable")
-	--vim.cmd("hide")
 end
 
 -- Function to send a command (e.g., 'r' or 'R') to the flutter attach terminal
@@ -47,4 +64,3 @@ function flutter_attach_setup()
 	flutter_attach()
 	set_flutter_keymaps()
 end
-
