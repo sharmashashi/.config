@@ -22,12 +22,6 @@ return {
 
 				-- This gets forwarded to the Flutter CLI tool, substitute `linux` for whatever device you wish to launch
 				--toolArgs = {"-d", "macos"}
-				--toolArgs = {"-d", "chrome"}
-				--	toolArgs = {"-d", "7D3A5F98-8D9B-4508-B43C-AA2EFCE9E924"}
-				--toolArgs = { "-d", "9B68399B-1DAD-4967-856D-F6E99456E579", "--flavor=development_ios" },
-				--toolArgs = {"-d", "emulator-5554", "--flavor=development_android"}
-				--toolArgs = {"-d", "emulator-5554"}
-				--toolArgs = {"-d", "065c95130405"}
 				toolArgs = function()
 					return { "-d", flutter_device_id, }
 				end
