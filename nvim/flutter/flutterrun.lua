@@ -1,14 +1,26 @@
 -- flutter_tools.lua
--- Function to run shell commands
-function run_shell_command(command)
-	local handle = io.popen(command)
-	local result = handle:read("*a")
-	handle:close()
-	return result
-end
 
 -- Function to get a list of available Flutter devices
 function get_flutter_devices()
+	local devices_list = run_shell_command("flutter devices")
+	local devices = {}
+
+	for line in devices_list:gmatch("[^\r\n]+") do
+		-- Match lines with the structure: <name> • <id> • <type>
+		local name, id, type = line:match("([^•]+)•%s*([^•]+)•%s*([^•]+)")
+		if name and id and type then
+			-- Trim and clean up the matched fields
+			table.insert(devices, {
+				name = name:match("^%s*(.-)%s*$"), -- Trim leading/trailing spaces
+				id = id:match("^%S+"), -- Get the non-space ID
+				type = type:match("^%s*(.-)%s*$") -- Trim leading/trailing spaces
+			})
+		end
+	end
+
+	return devices
+end
+function get_flutter_devices_temp()
 	local devices_list = run_shell_command("flutter devices")
 	local devices = {}
 

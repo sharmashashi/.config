@@ -2,7 +2,7 @@
 
 -- Function to run shell commands
 function run_shell_command(command)
-	local handle = io.popen(command)
+	local handle = io.popen(command, "r+")
 	local result = handle:read("*a")
 	handle:close()
 	return result
@@ -12,19 +12,26 @@ end
 function get_flutter_emulators()
 	local emulators_list = run_shell_command("flutter emulators")
 	local emulators = {}
+	local start_parsing = false -- Flag to skip header lines
 
 	for line in emulators_list:gmatch("[^\r\n]+") do
-		local id, name, type, platform = line:match("([^•]+)•%s*([^•]+)•%s*([^•]+)•%s*([^•]+)")
-		if id and name and type and platform then
-			table.insert(
-				emulators,
-				{
-					id = id:match("%S+"),
-					name = name:match("%s*(.+)%s*"),
-					type = type:match("%s*(.+)%s*"),
-					platform = platform:match("%s*(.+)%s*"),
-				}
-			)
+		-- Start parsing after encountering the header
+		if line:match("^Id%s+•%s+Name%s+•%s+Manufacturer%s+•%s+Platform") then
+			start_parsing = true
+		elseif start_parsing then
+			-- Match lines with emulator details: Id • Name • Manufacturer • Platform
+			local id, name, manufacturer, platform = line:match("([^•]+)•%s*([^•]+)•%s*([^•]+)•%s*([^•]+)")
+			if id and name and manufacturer and platform then
+				table.insert(
+					emulators,
+					{
+						id = id:match("%S+"), -- Trim and clean up id
+						name = name:match("^%s*(.-)%s*$"), -- Trim name
+						manufacturer = manufacturer:match("^%s*(.-)%s*$"), -- Trim manufacturer
+						platform = platform:match("^%s*(.-)%s*$") -- Trim platform
+					}
+				)
+			end
 		end
 	end
 
@@ -51,11 +58,8 @@ function close_emulators_window()
 	vim.api.nvim_win_close(win_id, true)
 end
 
--- Function to open a centered floating window with decorated border and display Flutter emulators
--- Function to open a centered floating window and display Flutter emulators
 function show_flutter_emulators()
 	local emulators = get_flutter_emulators()
-
 	-- Calculate window dimensions and position
 	local width = 60
 	local height = #emulators + 2
@@ -67,7 +71,8 @@ function show_flutter_emulators()
 	for _, emulator in ipairs(emulators) do
 		table.insert(
 			lines,
-			emulator.id .. ": " .. emulator.name .. " (" .. emulator.type .. " - " .. emulator.platform .. ")"
+			emulator.id ..
+			": " .. emulator.name .. " (" .. emulator.manufacturer .. " - " .. emulator.platform .. ")"
 		)
 	end
 
@@ -76,8 +81,8 @@ function show_flutter_emulators()
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.fn.split(content, "\n"))
 
-        local win_id = vim.api.nvim_open_win(bufnr, true, {
-		relative = "editor",
+	local win_id = vim.api.nvim_open_win(bufnr, true, {
+		relative = "win",
 		width = width,
 		height = height,
 		row = row,
@@ -94,7 +99,8 @@ function show_flutter_emulators()
 		":lua launch_selected_emulator()<CR>",
 		{ noremap = true, silent = true }
 	)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "q", ":lua close_emulators_window()<CR>", { noremap = true, silent = true })
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "q", ":lua close_emulators_window()<CR>",
+		{ noremap = true, silent = true })
 
 	vim.api.nvim_win_set_option(win_id, "winblend", 50)
 end
