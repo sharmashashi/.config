@@ -1,4 +1,7 @@
 flutter_device_id = nil;
+flavor = nil
+
+
 return {
 	"mfussenegger/nvim-dap",
 	config = function()
@@ -23,12 +26,26 @@ return {
 				-- This gets forwarded to the Flutter CLI tool, substitute `linux` for whatever device you wish to launch
 				--toolArgs = {"-d", "macos"}
 				toolArgs = function()
-					return { "-d", flutter_device_id, }
+					if flavor then
+						return { "-d", flutter_device_id, "--flavor", flavor }
+					else
+						return { "-d", flutter_device_id, }
+					end
 				end
 			},
 		}
 
 		function start_dap()
+			vim.ui.input(
+				{ prompt = "Enter flavor. Hit enter to continue without flavor" },
+				function(input)
+					if input == '' then
+						flavor = nil;
+					else
+						flavor = input
+					end
+				end
+			)
 			if (flutter_device_id) then
 				vim.ui.input(
 					{
